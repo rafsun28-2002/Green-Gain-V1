@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Select Products{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/SelectProduct.css' %}">
+
+<!-- Container -->
+<div class="container">
+
+  <!-- Top Section -->
+  <div class="top-bar">
+    <h1 class="page-title">Select Products</h1>
+    <div class="stepper">
+      <div class="step active"><span>✓</span><p>Choose Plan</p></div>
+      <div class="line active"></div>
+      <div class="step active"><span>02</span><p>Select Product</p></div>
+      <div class="line"></div>
+      <div class="step"><span>03</span><p>Checkout</p></div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Product Tables -->
+  <div id="tables-container"></div>
+
+  <!-- Proceed Button -->
+  <div class="form-group right">
+    <button type="button" class="proceed-btn" id="proceedBtn">Proceed →</button>
+  </div>
+
+</div>
+
+<script>
+  const tablesContainer = document.getElementById('tables-container');
+  const deliveryDays = JSON.parse(localStorage.getItem('deliveryDays')) || [];
+
+  function createTable(dayName, dayKey) {
+    const tableWrapper = document.createElement('div');
+    tableWrapper.classList.add('day-plan-wrapper');
+    tableWrapper.innerHTML = `
+      <div class="day-header">
+        <h2>${dayName} Plan</h2>
+        <button class="add-product-btn" onclick="selectDayAndGo('${dayKey}')">+</button>
+      </div>
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="${dayKey}-list"></tbody>
+      </table>
+      <div class="total-section">
+        <h2>Total: ৳<span id="${dayKey}-total">0</span></h2>
+      </div>
+    `;
+    tablesContainer.appendChild(tableWrapper);
+  }
+
+  function selectDayAndGo(dayKey) {
+    localStorage.setItem('addingToDay', dayKey);
+    sessionStorage.setItem('fromSelectProduct', 'true');
+    window.location.href = "{% url 'product' %}";
+  }
+
+  function renderProducts(dayKey) {
+    const plan = JSON.parse(localStorage.getItem('plan_' + dayKey)) || [];
+    const list = document.getElementById(`${dayKey}-list`);
+    const totalSpan = document.getElementById(`${dayKey}-total`);
+
+    list.innerHTML = '';
+    let total = 0;
+
+    plan.forEach((product, index) => {
+      const quantity = product.quantity || 1;
+      const subtotal = product.price * quantity;
+      total += subtotal;
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><img src="${product.img}" alt="${product.name}" class="product-img"></td>
+        <td>${product.name}</td>
+        <td>৳${product.price}</td>
+        <td><input type="number" value="${quantity}" min="1" data-index="${index}" data-day="${dayKey}" class="quantity-input"></td>
+        <td>৳<span>${subtotal}</span></td>
+        <td><button class="delete-btn" data-index="${index}" data-day="${dayKey}">❌</button></td>
+      `;
+      list.appendChild(row);
+    });
+
+    totalSpan.textContent = total;
+  }
+
+  function renderAllTables() {
+    tablesContainer.innerHTML = '';
+    deliveryDays.forEach((day, i) => {
+      const key = `day${i + 1}`;
+      createTable(`Day ${i + 1}`, key);
+      renderProducts(key);
+    });
+  }
+
+  renderAllTables();
+
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+      renderAllTables();
+    }
+  });
+
+  document.addEventListener('input', function (e) {
+    if (e.target.classList.contains('quantity-input')) {
+      const index = e.target.dataset.index;
+      const dayKey = e.target.dataset.day;
+      const newQty = parseInt(e.target.value);
+      if (newQty > 0) {
+        const plan = JSON.parse(localStorage.getItem('plan_' + dayKey)) || [];
+        plan[index].quantity = newQty;
+        localStorage.setItem('plan_' + dayKey, JSON.stringify(plan));
+        renderProducts(dayKey);
+      }
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('delete-btn')) {
+      const index = e.target.dataset.index;
+      const dayKey = e.target.dataset.day;
+      const plan = JSON.parse(localStorage.getItem('plan_' + dayKey)) || [];
+      plan.splice(index, 1);
+      localStorage.setItem('plan_' + dayKey, JSON.stringify(plan));
+      renderProducts(dayKey);
+    }
+  });
+
+  document.getElementById("proceedBtn").addEventListener("click", function () {
+    window.location.href = "{% url 'checkout' %}";
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block title %}Create Your Plan{% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/CreatePlan.css' %}">
+
+<!-- Container -->
+<div class="container">
+
+  <!-- Stepper -->
+  <div class="top-bar">
+    <h1>Create Your Plan</h1>
+    <div class="stepper">
+      <div class="step active"><span>01</span><p>Choose Plan</p></div>
+      <div class="line active"></div>
+      <div class="step"><span>02</span><p>Select Product</p></div>
+      <div class="line"></div>
+      <div class="step"><span>03</span><p>Checkout</p></div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Form -->
+  <form id="plan-form" onsubmit="event.preventDefault()">
+
+    <!-- Subscription -->
+    <div class="form-group">
+      <label>Subscription Period</label>
+      <div class="button-group" data-name="subscription">
+        <button type="button" class="select-btn">1 Week</button>
+        <button type="button" class="select-btn">2 Weeks</button>
+        <button type="button" class="select-btn">3 Weeks</button>
+        <button type="button" class="select-btn">1 Month</button>
+      </div>
+      <input type="hidden" name="subscription" />
+    </div>
+
+    <!-- Frequency -->
+    <div class="form-group">
+      <label>Delivery Frequency</label>
+      <div class="button-group" data-name="frequency">
+        <button type="button" class="select-btn">2 Days a Week</button>
+        <button type="button" class="select-btn">3 Days a Week</button>
+      </div>
+      <input type="hidden" name="frequency" />
+    </div>
+
+    <!-- Preferred Days -->
+    <div class="form-group">
+      <label>Preferred Days for Delivery</label>
+      <div class="button-group multi-select" data-name="days">
+        {% for day in days %}
+  <button type="button" class="select-btn">{{ day }}</button>
+{% endfor %}
+
+      </div>
+      <input type="hidden" name="days" />
+    </div>
+
+    <!-- Time -->
+    <div class="form-group">
+      <label>Preferred Time for Delivery</label>
+      <div class="button-group" data-name="time">
+        <button type="button" class="select-btn">07:30 am - 10:00 am</button>
+        <button type="button" class="select-btn">12:00 pm - 03:30 pm</button>
+        <button type="button" class="select-btn">06:30 pm - 09:00 pm</button>
+      </div>
+      <input type="hidden" name="time" />
+    </div>
+
+    <!-- Proceed -->
+    <div class="form-group right">
+      <button type="submit" class="proceed-btn">Proceed →</button>
+    </div>
+
+  </form>
+</div>
+
+<script>
+let maxDaysAllowed = 0;
+
+document.querySelectorAll('.button-group').forEach(group => {
+  const input = group.nextElementSibling;
+  const isMulti = group.classList.contains('multi-select');
+  const groupName = group.getAttribute('data-name');
+
+  group.addEventListener('click', e => {
+    if (!e.target.classList.contains('select-btn')) return;
+
+    if (!isMulti) {
+      group.querySelectorAll('.select-btn').forEach(btn => btn.classList.remove('active'));
+      e.target.classList.add('active');
+      input.value = e.target.textContent.trim();
+
+      if (groupName === 'frequency') {
+        const text = e.target.textContent.trim();
+        maxDaysAllowed = text.includes('2') ? 2 : 3;
+
+        const daysGroup = document.querySelector('[data-name="days"]');
+        const dayInput = daysGroup.nextElementSibling;
+        daysGroup.querySelectorAll('.select-btn').forEach(btn => btn.classList.remove('active'));
+        dayInput.value = '';
+      }
+    } else {
+      const selected = [...group.querySelectorAll('.select-btn.active')];
+      if (e.target.classList.contains('active')) {
+        e.target.classList.remove('active');
+      } else {
+        if (selected.length >= maxDaysAllowed) return;
+        e.target.classList.add('active');
+      }
+
+      const selectedDays = [...group.querySelectorAll('.select-btn.active')].map(btn => btn.textContent.trim());
+      input.value = selectedDays.join(', ');
+    }
+  });
+});
+
+document.getElementById('plan-form').addEventListener('submit', function () {
+  const subscription = document.querySelector('input[name="subscription"]').value.trim();
+  const frequency = document.querySelector('input[name="frequency"]').value.trim();
+  const days = document.querySelector('input[name="days"]').value.split(',').map(day => day.trim()).filter(Boolean);
+  const time = document.querySelector('input[name="time"]').value.trim();
+
+  if (!subscription || !frequency || !time) {
+    alert("Please complete all fields!");
+    return;
+  }
+
+  if (days.length !== maxDaysAllowed) {
+    alert(`Please select exactly ${maxDaysAllowed} days.`);
+    return;
+  }
+
+  localStorage.setItem('deliveryDays', JSON.stringify(days));
+  window.location.href = "{% url 'select_product' %}";  // Update this URL name
+});
+</script>
+{% endblock %}

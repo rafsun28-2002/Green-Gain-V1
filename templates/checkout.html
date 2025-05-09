@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+
+<div class="container">
+
+  <!-- Stepper -->
+  <div class="top-bar">
+    <div class="stepper-wrapper">
+      <h1>Checkout</h1>
+      <div class="stepper">
+        <div class="step active"><span>✓</span><p>Choose Plan</p></div>
+        <div class="line active"></div>
+        <div class="step active"><span>✓</span><p>Select Product</p></div>
+        <div class="line active"></div>
+        <div class="step active"><span>03</span><p>Checkout</p></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <h2 class="section-title">Billing Information</h2>
+
+  <form method="post" class="form-box">
+    {% csrf_token %}
+
+    <div class="form-section">
+      <h3>Customer Info</h3>
+
+      <div class="row">
+        <div class="field">{{ form.firstName.label_tag }}{{ form.firstName }}</div>
+        <div class="field">{{ form.lastName.label_tag }}{{ form.lastName }}</div>
+      </div>
+
+      <div class="row">
+        <div class="field full">{{ form.street.label_tag }}{{ form.street }}</div>
+      </div>
+
+      <div class="row">
+        <div class="field">{{ form.country.label_tag }}{{ form.country }}</div>
+        <div class="field">{{ form.state.label_tag }}{{ form.state }}</div>
+      </div>
+
+      <div class="row">
+        <div class="field">{{ form.email.label_tag }}{{ form.email }}</div>
+        <div class="field">{{ form.phone.label_tag }}{{ form.phone }}</div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Additional Info</h3>
+      <div class="field full">{{ form.notes.label_tag }}{{ form.notes }}</div>
+    </div>
+
+    <div class="button-row">
+      <button type="submit" class="done-btn">Done!</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

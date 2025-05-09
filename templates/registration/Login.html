@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login - GreenGrain{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/Login.css' %}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Promo Banner -->
+<div class="promo-banner">
+  <img src="{% static 'Images/banner.png' %}" alt="Promo Banner" />
+  <div class="promo-text">
+    Register for 2 months subscription and get free delivery for the entire period!
+  </div>
+</div>
+
+<!-- Login Form -->
+<div class="page-content">
+  <div class="login-card">
+    <h2>Login</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="input-group">
+        <input type="email" id="email" name="email" placeholder="Email" required />
+      </div>
+
+      <div class="input-group password-group">
+        <input type="password" id="password" name="password" placeholder="Password" required />
+      </div>
+
+      <div class="form-options">
+        <label><input type="checkbox" /> Remember me</label>
+        <a href="#">Forget Password</a>
+      </div>
+
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <div class="register-link">
+      Don't have an account? <a href="{% url 'register' %}">Register</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

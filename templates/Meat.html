@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Meats - GreenGrain{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Products.css' %}">
+
+<div class="container">
+  <h1 class="page-title">Meats</h1>
+
+  <div class="product-grid">
+    {% for product in products %}
+      <div class="product-card" data-name="{{ product.name }}" data-price="{{ product.price }}" data-img="{{ product.image.url }}">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p>৳{{ product.price }}</p>
+        <button class="add-btn">+</button>
+      </div>
+    {% empty %}
+      <p>No vegetable products available at the moment.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  function addToPlan(name, price, img) {
+    const addingToDay = localStorage.getItem('addingToDay') || 'day1';
+    let plan = JSON.parse(localStorage.getItem('plan_' + addingToDay)) || [];
+
+    const exists = plan.find(item => item.name === name);
+    if (exists) return;
+
+    plan.push({ name: name, price: parseFloat(price), img: img });
+    localStorage.setItem('plan_' + addingToDay, JSON.stringify(plan));
+  }
+
+  document.querySelectorAll('.add-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      const card = this.closest('.product-card');
+      const name = card.getAttribute('data-name');
+      const price = card.getAttribute('data-price');
+      const img = card.getAttribute('data-img');
+      addToPlan(name, price, img);
+    });
+  });
+</script>
+
+{% endblock %}

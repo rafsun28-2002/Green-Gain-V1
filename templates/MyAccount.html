@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Account</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet" />
+  <link rel="stylesheet" href="MyAccount.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="navcontent">
+      <div class="logo">
+        <a href="index.html"><img src="Images/unnamed (1).png" alt="Logo" width="125px"></a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Products.html">Products</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="account">
+        <a href="Login.html"><img src="Images/Account Icon.png" alt="Account Icon" width="25px"></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Account</h1>
+    <hr class="divider">
+
+        <!-- User Info Section -->
+        <div class="account-box">
+          <h2>User Info</h2>
+          <div class="account-content">
+            <form id="user-info-form" class="account-form">
+              <div class="row">
+                <div class="field">
+                  <label for="ui-first">First name</label>
+                  <input id="ui-first" name="firstName" type="text" required>
+                </div>
+                <div class="field">
+                  <label for="ui-last">Last name</label>
+                  <input id="ui-last" name="lastName" type="text" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <label for="ui-email">Email</label>
+                  <input id="ui-email" name="email" type="email" readonly>
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <label for="ui-phone">Phone Number</label>
+                  <input id="ui-phone" name="phone" type="tel" required>
+                </div>
+              </div>
+              <div class="action-msg" id="ui-msg"></div>
+              <div class="action-buttons">
+                <button type="submit" class="btn-save">Save Changes</button>
+              </div>
+            </form>
+    
+            <div class="avatar-section">
+              <img id="avatar-preview" src="Images/avatar-placeholder.png" alt="Avatar">
+              <input type="file" id="avatar-input" accept="image/*" hidden>
+              <button id="choose-image-btn" class="btn-choose">Choose Image</button>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Billing Address Section -->
+        <div class="account-box">
+          <h2>Billing Address</h2>
+          <form id="billing-form" class="account-form">
+            <div class="row">
+              <div class="field"><label for="ba-first">First name</label><input id="ba-first" name="firstName" type="text" required></div>
+              <div class="field"><label for="ba-last">Last name</label><input id="ba-last" name="lastName" type="text" required></div>
+              <div class="field"><label for="ba-company">Company Name <span>(optional)</span></label><input id="ba-company" name="company" type="text"></div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="ba-street">Street Address</label>
+                <input id="ba-street" name="street" type="text" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field"><label for="ba-country">Country / Region</label><select id="ba-country" name="country" required><option>Bangladesh</option></select></div>
+              <div class="field"><label for="ba-state">States</label><select id="ba-state" name="state" required><option>Dhaka</option><option>Chittagong</option></select></div>
+              <div class="field"><label for="ba-zip">Zip Code</label><input id="ba-zip" name="zip" type="text" required></div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="ba-email">Email</label>
+                <input id="ba-email" name="email" type="email" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="ba-phone">Phone</label>
+                <input id="ba-phone" name="phone" type="tel" required>
+              </div>
+            </div>
+            <div class="action-msg" id="ba-msg"></div>
+            <div class="action-buttons">
+              <button type="submit" class="btn-save">Save Changes</button>
+            </div>
+          </form>
+        </div>
+    
+
+    <!-- Change Password Section -->
+    <div class="account-box">
+      <h2>Change Password</h2>
+      <form id="password-form" class="account-form">
+        <div class="row">
+          <div class="field">
+            <label for="cp-current">Current Password</label>
+            <div class="pwd-wrapper">
+              <input id="cp-current" name="current" type="password" required>
+              <span class="toggle-pwd" data-target="cp-current"><i class="fa-regular fa-eye"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="cp-new">New Password</label>
+            <div class="pwd-wrapper">
+              <input id="cp-new" name="new" type="password" required>
+              <span class="toggle-pwd" data-target="cp-new"><i class="fa-regular fa-eye"></i></span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="cp-confirm">Confirm Password</label>
+            <div class="pwd-wrapper">
+              <input id="cp-confirm" name="confirm" type="password" required>
+              <span class="toggle-pwd" data-target="cp-confirm"><i class="fa-regular fa-eye"></i></span>
+            </div>
+            <div id="match-error" style="color:#d10000;font-size:14px;margin-top:4px;display:none;">
+              Passwords do not match.
+            </div>
+          </div>
+        </div>
+        <div class="action-msg" id="cp-msg"></div>
+        <div class="action-buttons">
+          <button type="submit" id="cp-submit" class="btn-save" disabled>Change Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-col-des">
+        <h4>GreenGrain</h4>
+        <p>A convenient subscription-based service that delivers fresh vegetables, fruits, and everyday grocery essentials right to your doorstep.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-square-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>My Account</h4><ul><li><a href="#">My Account</a></li><li><a href="#">Order History</a></li></ul></div>
+      <div class="footer-col"><h4>Help</h4><ul><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+      <div class="footer-col"><h4>Location</h4><p>7,8 Gurudas Sarkar Lane,<br>Narinda, Dhaka -1100</p></div>
+    </div>
+    <div class="footer-bottom">© 2025 GreenGrain. All Rights Reserved</div>
+  </footer>
+
+  <script>
+    // -- Toggle visibility for all pwd fields --
+    document.querySelectorAll('.toggle-pwd').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const input = document.getElementById(btn.dataset.target);
+        const icon = btn.querySelector('i');
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.classList.replace('fa-eye','fa-eye-slash');
+        } else {
+          input.type = 'password';
+          icon.classList.replace('fa-eye-slash','fa-eye');
+        }
+      });
+    });
+
+    // -- Real-time New vs Confirm match validation --
+    const newPwd     = document.getElementById('cp-new');
+    const confPwd    = document.getElementById('cp-confirm');
+    const matchError = document.getElementById('match-error');
+    const cpSubmit   = document.getElementById('cp-submit');
+
+    function validateMatch() {
+      if (!confPwd.value) {
+        matchError.style.display = 'none';
+        cpSubmit.disabled = true;
+        return;
+      }
+      if (newPwd.value === confPwd.value) {
+        matchError.style.display = 'none';
+        cpSubmit.disabled = false;
+      } else {
+        matchError.style.display = 'block';
+        cpSubmit.disabled = true;
+      }
+    }
+    newPwd.addEventListener('input', validateMatch);
+    confPwd.addEventListener('input', validateMatch);
+
+    // -- Existing password-change logic, now firing only when match OK --
+    document.getElementById('password-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const storedPwd = localStorage.getItem('accountPassword') || '';
+      if (!storedPwd) {
+        // first-time set
+        localStorage.setItem('accountPassword', newPwd.value);
+        document.getElementById('cp-msg').textContent = 'Password set';
+      } else {
+        if (document.getElementById('cp-current').value !== storedPwd) {
+          document.getElementById('cp-msg').textContent = 'Current password incorrect';
+          return;
+        }
+        localStorage.setItem('accountPassword', newPwd.value);
+        document.getElementById('cp-msg').textContent = 'Password changed';
+      }
+      // clear fields
+      document.getElementById('cp-current').value = '';
+      newPwd.value = confPwd.value = '';
+      cpSubmit.disabled = true;
+      setTimeout(() => document.getElementById('cp-msg').textContent = '', 3000);
+    });
+  </script>
+</body>
+</html>

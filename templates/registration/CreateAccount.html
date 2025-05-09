@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create Account{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/CreateAccount.css' %}"/>
+
+<div class="page-content">
+  <div class="login-card">
+    <h2>Create Account</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      {% if form.errors %}
+      <div class="form-errors">
+        <ul>
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>{{ field.label }}: {{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <button type="submit" class="login-btn">Create Account</button>
+    </form>
+
+    <div class="register-link">
+      Already have an account? <a href="{% url 'login' %}">Login</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <h1>Thank You!</h1>
+  <p>Your order has been submitted successfully. We’ll be in touch soon!</p>
+  <a href="{% url 'index' %}" class="proceed-btn">Go to Homepage</a>
+</div>
+{% endblock %}

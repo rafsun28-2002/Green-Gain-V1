@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f7f7;
+  }
+  
+  .container {
+    max-width: 1440px;
+    margin: 75px auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 60px 80px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+  
+ /* Top Bar */
+ .top-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 20px;
+  }
+  
+  .top-bar h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #00B207;
+    margin-right: 300px;
+  }
+  
+  .divider {
+    margin: 30px 0 50px;
+    border: 0;
+    height: 1px;
+    background: #ddd;
+  }
+  
+  /* Stepper */
+  .stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex: 1;
+    gap: 16px;
+  }
+  
+  .step {
+    text-align: center;
+    flex-shrink: 0;
+    min-width: 80px;
+  }
+  
+  .step span {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: bold;
+    background: #ccc;
+    color: white;
+    margin-bottom: 5px;
+  }
+  
+  .step.active span {
+    background: #00B207;
+  }
+  
+  .step p {
+    font-size: 14px;
+    color: #333;
+    margin-top: 2px;
+  }
+  
+  .line {
+    flex-grow: 1;
+    height: 3px;
+    background: #ccc;
+    margin: 0 10px;
+    border-radius: 2px;
+  }
+  
+  .line.active {
+    background: #00B207;
+  }
+  
+  /* Section Title */
+  .section-title {
+    font-size: 24px;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Styling */
+  .form-box {
+    margin-top: 20px;
+  }
+  
+  .form-section {
+    margin-bottom: 40px;
+  }
+  
+  .form-section h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .field.full {
+    flex: 1 1 100%;
+  }
+  
+  label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+  
+  input,
+  select,
+  textarea {
+    padding: 12px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #00B207;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .button-row {
+    text-align: right;
+  }
+  
+  .done-btn {
+    background-color: #00B207;
+    color: white;
+    padding: 14px 36px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .done-btn:hover {
+    background-color: #000;
+  }
+  

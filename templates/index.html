@@ -1,0 +1,149 @@
+<!-- Notification Banner -->
+<div class="notification">
+    <p>Register for 2 months subscription and get free delivery for the entire period!</p>
+</div>
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}GreenGrains - Home{% endblock %}
+{% block content %}
+
+<div class="main">
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="herotext">
+            <h4 class="welcome">WELCOME TO <span>GreenGrain!</span></h4>
+            <h1>The Easiest Way to<br>Eat Better at Home Everyday</h1>
+            <h3><span class="off">10% OFF</span> On First Purchase</h3>
+            <p>Freshly sourced vegetables and grocery delivered to your door.</p>
+            <a href="{% url 'create_plan' %}" class="btn">Create Plan &#8594;</a>
+        </div>
+
+        <div class="heroimg">
+            <img src="{% static 'Images/Hero Img.png' %}" alt="Hero Image">
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features">
+        <div class="feature">
+            <img src="{% static 'Images/delivery-truck 1.png' %}" alt="Free Shipping Icon">
+            <div>
+                <h4>Free Shipping</h4>
+                <p>Free shipping on all your order</p>
+            </div>
+        </div>
+        <div class="feature">
+            <img src="{% static 'Images/headphones 1.png' %}" alt="Customer Support Icon">
+            <div>
+                <h4>Customer Support 24/7</h4>
+                <p>Instant access to Support</p>
+            </div>
+        </div>
+        <div class="feature">
+            <img src="{% static 'Images/shopping-bag.png' %}" alt="Secure Payment Icon">
+            <div>
+                <h4>100% Secure Payment</h4>
+                <p>We ensure your money is safe</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How It Works Section -->
+<div class="section">
+    <div class="section-title">
+        <h1>How It Works</h1>
+        <p>We make it easy to feed your family the best.</p>
+    </div>
+
+    <div class="sec">
+        <img src="{% static 'Images/np_file_202505.jpeg' %}" alt="We Source">
+        <div class="sec-content">
+            <h3>We Source</h3>
+            <p>We source every product direct from farmers with the highest standards for quality.</p>
+        </div>
+    </div>
+
+    <div class="sec">
+        <img src="{% static 'Images/Green and Yellow Modern Laptop Mockup Instagram Post.png' %}" alt="You Choose">
+        <div class="sec-content">
+            <h3>You Choose</h3>
+            <p>Choose your preferred items and create your own custom plan. Select a delivery frequency that matches your needs.</p>
+        </div>
+    </div>
+
+    <div class="sec">
+        <img src="{% static 'Images/01.jpg' %}" alt="We Deliver">
+        <div class="sec-content">
+            <h3>We Deliver</h3>
+            <p>Your orders are shipped according to your preferred schedule, to your door.</p>
+        </div>
+    </div>
+
+    <div class="sec">
+        <img src="{% static 'Images/depositphotos_715230314-stock-photo-happy-loving-indian-asian-young.jpg' %}" alt="You Enjoy">
+        <div class="sec-content">
+            <h3>You Enjoy</h3>
+            <p>High-quality vegetables and grocery items are delivered regularly, saving you more time for amazing meals together.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="stats-container">
+        <div class="stat-card">
+            <h2>36k+</h2>
+            <p>Happy Customer</p>
+        </div>
+        <div class="stat-card">
+            <h2>65+</h2>
+            <p>Experienced Team Members</p>
+        </div>
+        <div class="stat-card">
+            <h2>12K+</h2>
+            <p>Monthly Orders</p>
+        </div>
+    </div>
+</section>
+
+<!-- Product Categories Section -->
+<div class="container">
+    <h1>Product Category</h1>
+    <div class="heading-underline">
+        <span class="dash light"></span>
+        <span class="line center"></span>
+        <span class="dash light"></span>
+    </div>
+
+    <div class="categories">
+        <a href="{% url 'category_detail' category='Vegetables' %}" class="category-card">
+            <img src="{% static 'Images/Vegetable.png' %}" alt="Vegetables" />
+            <h3 class="category-title">Vegetables</h3>
+            <p class="product-count">{{ vegetables_count }} Products</p>
+        </a>
+        <a href="{% url 'category_detail' category='Fruits' %}" class="category-card">
+            <img src="{% static 'Images/fruits 2.png' %}" alt="Fruits" />
+            <h3 class="category-title">Fruits</h3>
+            <p class="product-count">{{ fruits_count }} Products</p>
+        </a>
+        <a href="{% url 'category_detail' category='Meat' %}" class="category-card">
+            <img src="{% static 'Images/meat 1.png' %}" alt="Meat" />
+            <h3 class="category-title">Meat</h3>
+            <p class="product-count">{{ meat_count }} Products</p>
+        </a>
+        <a href="{% url 'category_detail' category='Fish' %}" class="category-card">
+            <img src="{% static 'Images/fish 1.png' %}" alt="River Fish" />
+            <h3 class="category-title">River Fish</h3>
+            <p class="product-count">{{ fish_count }} Products</p>
+        </a>
+        <a href="{% url 'category_detail' category='Spices' %}" class="category-card">
+            <img src="{% static 'Images/snacks 1.png' %}" alt="Spices" />
+            <h3 class="category-title">Spices</h3>
+            <p class="product-count">{{ spices_count }} Products</p>
+        </a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,127 @@
+<!-- templates/base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}GreenGrains{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
+    {% if messages %} {% for message in messages %}
+    <div class="alert {{ message.tags }}">{{ message }}</div>
+    {% endfor %} {% endif %}
+
+    <div class="page-wrapper">
+      <!-- ✅ Navbar -->
+      <div class="navbar">
+        <div class="navcontent">
+          <div class="logo">
+            <a href="{% url 'index' %}">
+              <img
+                src="{% static 'Images/unnamed (1).png' %}"
+                alt="Logo"
+                width="125px"
+              />
+            </a>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="{% url 'index' %}">Home</a></li>
+              <li><a href="{% url 'product' %}">Products</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="account">
+            <a href="{% url 'login' %}">
+              <img
+                src="{% static 'Images/Account Icon.png' %}"
+                alt="Account Icon"
+                width="25px"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      {% block content %} {% endblock %}
+
+      <!-- ✅ Footer -->
+      <footer class="footer">
+        <div class="footer-top">
+          <!-- Company Description -->
+          <div class="footer-col-des">
+            <h4>GreenGrain</h4>
+            <p>
+              A convenient subscription-based service that delivers fresh
+              vegetables, fruits, and everyday grocery essentials right to your
+              doorstep.
+            </p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/tayaib.rafsun" target="_blank"
+                ><i class="fa-brands fa-square-facebook"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/afrin.nahila?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="https://www.facebook.com/shimanto616" target="_blank"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="https://www.facebook.com/ishika.sporsho" target="_blank"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Account Info -->
+          <div class="footer-col">
+            <h4>My Account</h4>
+            <ul>
+              <li><a href="MyAccount.html">My Account</a></li>
+              <li><a href="#">Order History</a></li>
+            </ul>
+          </div>
+
+          <!-- Help Links -->
+          <div class="footer-col">
+            <h4>Helps</h4>
+            <ul>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Terms & Condition</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <!-- Misc Links -->
+          <div class="footer-col">
+            <h4>LocationProxy</h4>
+            <ul>
+              <li><a href="#">Product</a></li>
+              <li><a href="#">Helps</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Address -->
+          <div class="footer-col">
+            <h4>Location</h4>
+            <p>
+              7,8 Gurudas Sarkar Lane,<br />
+              Narinda, Dhaka -1100
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 GreenGrain. All Rights Reserved</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
